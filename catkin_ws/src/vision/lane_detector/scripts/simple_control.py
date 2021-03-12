@@ -12,8 +12,8 @@ from sensor_msgs.msg import LaserScan
 from std_msgs.msg import String
 
 # Stop if stop_flag is true :)
-stop_flag = 0  
-    
+stop_flag = 0
+
 ###############################################
 ##
 ##
@@ -21,7 +21,7 @@ def callback_query(msg):
     global query_str
     print("Received query: " + msg.data)
     query_str = msg.data
-    
+
 
 ###############################################
 ##
@@ -71,18 +71,18 @@ def callback_laser_scan(msg):
 		minimum_val = 50 # default value
 	query_str = "action(" + str(minimum_val) + ",Action)"
 	print(query_str)
-	
-    
+
+
 ###############################################
 ##
 ##
 def main():
-  
+
     rospy.init_node("lane_finder")
-    
+
     print("INITIALIZING TEST FOR PYSWIP")
     rospy.Subscriber("/query", String, callback_query)
-    pl_file = ""    
+    pl_file = ""
     global query_str
     query_str = ""
     if rospy.has_param("~pl_file"):
@@ -91,10 +91,10 @@ def main():
     if pl_file == "":
         print("PL file must be specified")
         return
-        
+
     prolog = Prolog()
     prolog.consult(pl_file)     
-    #print( list(prolog.query("action(0.3,Action)")))   
+    #print( list(prolog.query("action(0.3,Action)")))
 
     print("INITIALIZING SIMPLE CONTROL BY MARCOSOFT...")
     rospy.Subscriber("/app/camera/rgb/image_raw", Image, callback_rgb_raw)
@@ -103,10 +103,10 @@ def main():
     pub_speed    = rospy.Publisher("/AutoNOMOS_mini/manual_control/speed"   , Int16, queue_size=1)
     msg_steering = Int16()
     msg_speed    = Int16()
-    #loop = rospy.Rate(30)   
+    #loop = rospy.Rate(30)
 
     loop = rospy.Rate(10)
-       
+
     global best_line
     best_line  = [0, 2.2863812,1,0,0]
     goal_angle = 2.2863812
@@ -117,26 +117,26 @@ def main():
         C = best_line[4]
         error_theta = goal_angle - best_line[1]
         dist = abs(A*320 + B*480 + C)/math.sqrt(A**2 + B**2)
-        error_dist = goal_dist - dist 
+        error_dist = goal_dist - dist
         msg_steering.data = int(90 + error_dist/1.5 - 1.5*error_theta*180/math.pi)
-        
+
         if not query_str == "":
         	res = list(prolog.query(query_str))
  		hasattr(res, 'go')
         	print(res[0])
-		print(list(res[0]))  
+		print(list(res[0]))
 		print(res[0].get('Action'))
-	        if res[0].get('Action') == "go": 
+	        if res[0].get('Action') == "go":
         		if error_dist > 50:
         		    msg_speed.data = -100
         		else:
         		    msg_speed.data = -400
         	else:
-        		if res[0].get('Action') == "slowdown": 	    
+        		if res[0].get('Action') == "slowdown":
         		    msg_speed.data = -50
-        		else: 
-        		    if res[0].get('Action') == "stop": 	    
-        		    	msg_speed.data = 0        
+        		else:
+        		    if res[0].get('Action') == "stop":
+        		    	msg_speed.data = 0
         # print error_dist
         # print msg_steering.data
         pub_steering.publish(msg_steering)

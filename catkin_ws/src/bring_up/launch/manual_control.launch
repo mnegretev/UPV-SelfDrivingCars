@@ -1,6 +1,6 @@
 <launch>
   <arg name="world"  default="autoNOMOS_curved_road"/>
-  
+
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
@@ -8,6 +8,6 @@
     <arg name="debug" value="false"/>
     <arg name="world_name" value="$(arg world).world"/>
   </include>
-  
+  <param name="robot_description" textfile="$(find autonomos_gazebo_simulation)/models/AutoNOMOS_mini/model.urdf"/>
   <node name="simple_gui" pkg="simple_gui" type="simple_gui" output="screen"/>
 </launch>

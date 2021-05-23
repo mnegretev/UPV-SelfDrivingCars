@@ -1,0 +1,310 @@
+<?xml version="1.0" ?>
+<robot name="AutoNOMOS_mini">
+  <joint name="AutoNOMOS_mini__base_link_to_body" type="fixed">
+    <parent link="AutoNOMOS_mini__base_link"/>
+    <child link="AutoNOMOS_mini__body"/>
+    <origin rpy="0  0  0" xyz="0  0  0"/>
+    <axis xyz="0  0  0"/>
+    <limit effort="0" lower="0" upper="0" velocity="0"/>
+  </joint>
+  <joint name="AutoNOMOS_mini__back_left_wheel_joint" type="revolute">
+    <parent link="AutoNOMOS_mini__base_link"/>
+    <child link="AutoNOMOS_mini__back_left_wheel_link"/>
+    <origin rpy="1.5708  0      0" xyz="-0.125  0.1    0.01"/>
+    <axis xyz="0  1  0"/>
+    <limit effort="0.0" lower="-1e+16" upper="1e+16" velocity="0.0"/>
+  </joint>
+  <joint name="AutoNOMOS_mini__back_right_wheel_joint" type="revolute">
+    <parent link="AutoNOMOS_mini__base_link"/>
+    <child link="AutoNOMOS_mini__back_right_wheel_link"/>
+    <origin rpy="1.5708  0      0" xyz="-0.125 -0.1    0.01"/>
+    <axis xyz="0  1  0"/>
+    <limit effort="0.0" lower="-1e+16" upper="1e+16" velocity="0.0"/>
+  </joint>
+  <joint name="AutoNOMOS_mini__front_left_bar_joint" type="revolute">
+    <parent link="AutoNOMOS_mini__base_link"/>
+    <child link="AutoNOMOS_mini__front_left_bar_link"/>
+    <origin rpy="0  0  0" xyz="0.125  0.06   0.01"/>
+    <axis xyz="0  0  1"/>
+    <limit effort="0.0" lower="-0.5" upper="0.5" velocity="0.0"/>
+  </joint>
+  <joint name="AutoNOMOS_mini__front_left_wheel_joint" type="revolute">
+    <parent link="AutoNOMOS_mini__front_left_bar_link"/>
+    <child link="AutoNOMOS_mini__front_left_wheel_link"/>
+    <origin rpy="1.5708  0      0" xyz="0    0.04  0"/>
+    <axis xyz="0  1  0"/>
+    <limit effort="0.0" lower="-1e+16" upper="1e+16" velocity="0.0"/>
+  </joint>
+  <joint name="AutoNOMOS_mini__front_right_bar_joint" type="revolute">
+    <parent link="AutoNOMOS_mini__base_link"/>
+    <child link="AutoNOMOS_mini__front_right_bar_link"/>
+    <origin rpy="0  0  0" xyz="0.125 -0.06   0.01"/>
+    <axis xyz="0  0  1"/>
+    <limit effort="0.0" lower="-0.5" upper="0.5" velocity="0.0"/>
+  </joint>
+  <joint name="AutoNOMOS_mini__front_right_wheel_joint" type="revolute">
+    <parent link="AutoNOMOS_mini__front_right_bar_link"/>
+    <child link="AutoNOMOS_mini__front_right_wheel_link"/>
+    <origin rpy="1.5708  0      0" xyz="0   -0.04  0"/>
+    <axis xyz="0  1  0"/>
+    <limit effort="0.0" lower="-1e+16" upper="1e+16" velocity="0.0"/>
+  </joint>
+  <joint name="AutoNOMOS_mini__steer_joint" type="revolute">
+    <parent link="AutoNOMOS_mini__base_link"/>
+    <child link="AutoNOMOS_mini__steer_link"/>
+    <origin rpy="0  0  0" xyz="0.125  0     0.01"/>
+    <axis xyz="0  0  1"/>
+    <limit effort="0.0" lower="-0.5" upper="0.5" velocity="0.0"/>
+  </joint>
+  <joint name="AutoNOMOS_mini__ackermann_joint" type="revolute">
+    <parent link="AutoNOMOS_mini__steer_link"/>
+    <child link="AutoNOMOS_mini__ackermann_bar_link"/>
+    <origin rpy="0  0  0" xyz="-0.015  0     0"/>
+    <axis xyz="0  0  1"/>
+    <limit effort="0.0" lower="-0.5" upper="0.5" velocity="0.0"/>
+  </joint>
+  <joint name="AutoNOMOS_mini__ackermann_left_bar_joint" type="revolute">
+    <parent link="AutoNOMOS_mini__front_left_bar_link"/>
+    <child link="AutoNOMOS_mini__ackermann_bar_link"/>
+    <origin rpy="0  0  0" xyz="-0.015  0     0"/>
+    <axis xyz="0  0  1"/>
+    <limit effort="0.0" lower="-1e+16" upper="1e+16" velocity="0.0"/>
+  </joint>
+  <joint name="AutoNOMOS_mini__ackermann_right_bar_joint" type="revolute">
+    <parent link="AutoNOMOS_mini__front_right_bar_link"/>
+    <child link="AutoNOMOS_mini__ackermann_bar_link"/>
+    <origin rpy="0  0  0" xyz="-0.015  0     0"/>
+    <axis xyz="0  0  1"/>
+    <limit effort="0.0" lower="-1e+16" upper="1e+16" velocity="0.0"/>
+  </joint>
+  <joint name="AutoNOMOS_mini__laser_joint" type="fixed">
+    <parent link="AutoNOMOS_mini__base_link"/>
+    <child link="AutoNOMOS_mini__laser_link"/>
+    <origin rpy="0  0  0" xyz="-0.045  0     0.085"/>
+    <axis xyz="0  0  1"/>
+    <limit effort="0" lower="0" upper="0" velocity="0"/>
+  </joint>
+  <joint name="AutoNOMOS_mini__camera_joint" type="fixed">
+    <parent link="AutoNOMOS_mini__base_link"/>
+    <child link="AutoNOMOS_mini__camera_link"/>
+    <origin rpy="0    0.43  0" xyz="0.16     0       0.14499"/>
+    <axis xyz="0  0  1"/>
+    <limit effort="0" lower="0" upper="0" velocity="0"/>
+  </joint>
+  <link name="AutoNOMOS_mini__base_link">
+    <inertial>
+      <mass value="0"/>
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
+    </inertial>
+  </link>
+  <link name="AutoNOMOS_mini__body">
+    <inertial>
+      <mass value="6"/>
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <inertia ixx="0.0067" ixy="0.000000" ixz="0.00088" iyy="0.07846" iyz="0.000000" izz="0.08387"/>
+    </inertial>
+    <collision name="AutoNOMOS_mini__collision_body">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <mesh filename="package://PATHTOMESHES/UPV-SelfDrivingCars/catkin_ws/src/autonomos_gazebo_simulation/AutoNOMOS_mini/meshes/autonomos.dae" scale="1.0 1.0 1.0"/>
+      </geometry>
+    </collision>
+    <visual name="AutoNOMOS_mini__visual_body">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <mesh filename="package://PATHTOMESHES/UPV-SelfDrivingCars/catkin_ws/src/autonomos_gazebo_simulation/AutoNOMOS_mini/meshes/autonomos.dae" scale="1.0 1.0 1.0"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="AutoNOMOS_mini__back_left_wheel_link">
+    <inertial>
+      <mass value="0.010000"/>
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <inertia ixx="0.010000" ixy="0.000000" ixz="0.000000" iyy="0.010000" iyz="0.000000" izz="0.010000"/>
+    </inertial>
+    <collision name="AutoNOMOS_mini__back_left_wheel_link_geom">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <cylinder length="0.01000" radius="0.03000"/>
+      </geometry>
+    </collision>
+    <visual name="AutoNOMOS_mini__back_left_wheel_link_visual">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <cylinder length="0.01000" radius="0.03000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="AutoNOMOS_mini__back_right_wheel_link">
+    <inertial>
+      <mass value="0.010000"/>
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <inertia ixx="0.010000" ixy="0.000000" ixz="0.000000" iyy="0.010000" iyz="0.000000" izz="0.010000"/>
+    </inertial>
+    <collision name="AutoNOMOS_mini__back_right_wheel_link_geom">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <cylinder length="0.01000" radius="0.030000"/>
+      </geometry>
+    </collision>
+    <visual name="AutoNOMOS_mini__back_right_wheel_link_visual">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <cylinder length="0.01000" radius="0.030000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="AutoNOMOS_mini__front_left_bar_link">
+    <inertial>
+      <mass value="0.010000"/>
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <inertia ixx="0.010000" ixy="0.000000" ixz="0.000000" iyy="0.010000" iyz="0.000000" izz="0.010000"/>
+    </inertial>
+    <collision name="AutoNOMOS_mini__front_left_bar_link_geom">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <box size="0.040000 0.020000 0.005000"/>
+      </geometry>
+    </collision>
+    <visual name="AutoNOMOS_mini__front_left_bar_link_visual">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <box size="0.040000 0.020000 0.005000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="AutoNOMOS_mini__front_left_wheel_link">
+    <inertial>
+      <mass value="0.010000"/>
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <inertia ixx="0.010000" ixy="0.000000" ixz="0.000000" iyy="0.010000" iyz="0.000000" izz="0.010000"/>
+    </inertial>
+    <collision name="AutoNOMOS_mini__front_left_wheel_link_geom">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <cylinder length="0.01000" radius="0.030000"/>
+      </geometry>
+    </collision>
+    <visual name="AutoNOMOS_mini__front_left_wheel_link_visual">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <cylinder length="0.01000" radius="0.030000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="AutoNOMOS_mini__front_right_bar_link">
+    <inertial>
+      <mass value="0.010000"/>
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <inertia ixx="0.010000" ixy="0.000000" ixz="0.000000" iyy="0.010000" iyz="0.000000" izz="0.010000"/>
+    </inertial>
+    <collision name="AutoNOMOS_mini__front_right_bar_link_geom">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <box size="0.040000 0.020000 0.005000"/>
+      </geometry>
+    </collision>
+    <visual name="AutoNOMOS_mini__front_right_bar_link_visual">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <box size="0.040000 0.020000 0.005000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="AutoNOMOS_mini__front_right_wheel_link">
+    <inertial>
+      <mass value="0.010000"/>
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <inertia ixx="0.010000" ixy="0.000000" ixz="0.000000" iyy="0.010000" iyz="0.000000" izz="0.010000"/>
+    </inertial>
+    <collision name="AutoNOMOS_mini__front_right_wheel_link_geom">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <cylinder length="0.01000" radius="0.030000"/>
+      </geometry>
+    </collision>
+    <visual name="AutoNOMOS_mini__front_right_wheel_link_visual">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <cylinder length="0.01000" radius="0.030000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="AutoNOMOS_mini__steer_link">
+    <inertial>
+      <mass value="0.010000"/>
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <inertia ixx="0.010000" ixy="0.000000" ixz="0.000000" iyy="0.010000" iyz="0.000000" izz="0.010000"/>
+    </inertial>
+    <collision name="AutoNOMOS_mini__steer_link_geom">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <box size="0.040000 0.020000 0.005000"/>
+      </geometry>
+    </collision>
+    <visual name="AutoNOMOS_mini__steer_link_visual">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <box size="0.040000 0.020000 0.005000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="AutoNOMOS_mini__ackermann_bar_link">
+    <inertial>
+      <mass value="0.010000"/>
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <inertia ixx="0.010000" ixy="0.000000" ixz="0.000000" iyy="0.010000" iyz="0.000000" izz="0.010000"/>
+    </inertial>
+    <collision name="AutoNOMOS_mini__ackermann_bar_link_geom">
+      <origin rpy="0  0  0" xyz="0    0.06  0"/>
+      <geometry>
+        <box size="0.020000 0.150000 0.010000"/>
+      </geometry>
+    </collision>
+    <visual name="AutoNOMOS_mini__ackermann_bar_link_visual">
+      <origin rpy="0  0  0" xyz="0    0.06  0"/>
+      <geometry>
+        <box size="0.020000 0.150000 0.010000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="AutoNOMOS_mini__laser_link">
+    <inertial>
+      <mass value="0.1197"/>
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <inertia ixx="0.010000" ixy="0.000000" ixz="0.000000" iyy="0.010000" iyz="0.000000" izz="0.010000"/>
+    </inertial>
+    <collision name="AutoNOMOS_mini__collision_laser_link">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <cylinder length="0.02500" radius="0.040000"/>
+      </geometry>
+    </collision>
+    <visual name="AutoNOMOS_mini__visual_laser_link">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <cylinder length="0.02500" radius="0.040000"/>
+      </geometry>
+    </visual>
+  </link>
+  <link name="AutoNOMOS_mini__camera_link">
+    <inertial>
+      <mass value="0.1197"/>
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <inertia ixx="0.010000" ixy="0.000000" ixz="0.000000" iyy="0.010000" iyz="0.000000" izz="0.010000"/>
+    </inertial>
+    <collision name="AutoNOMOS_mini__collision_camera_link">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <box size="0.02 0.11 0.02"/>
+      </geometry>
+    </collision>
+    <visual name="AutoNOMOS_mini__visual_camera_link">
+      <origin rpy="0  0  0" xyz="0  0  0"/>
+      <geometry>
+        <box size="0.02 0.11 0.02"/>
+      </geometry>
+    </visual>
+  </link>
+</robot>

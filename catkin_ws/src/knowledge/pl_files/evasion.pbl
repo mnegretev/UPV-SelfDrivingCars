@@ -1,0 +1,35 @@
+min_central_thresh(0.5).
+max_central_thresh(1).
+
+min_right_thresh(0.8).
+max_right_thresh(1.2).
+
+min_left_thresh(0.8).
+max_left_thresh(1.2).
+
+0.6::getAction(long, long, long, go);0.2::getAction(long, long, medium, go);0.2::getAction(medium, long, long, go).
+0.4::getAction(long, long, short, turnLeftSide);0.2::getAction(medium, long, short, turnLeftSide);0.1::getAction(long, medium, medium, turnLeftSide);0.1::getAction(long, medium,short, turnLeftSide);0.1::getAction(medium, medium,short, turnLeftSide);0.02::getAction(long, short, long, turnLeftSide);0.02::getAction(long, short, short, turnLeftSide);0.02::getAction(medium, short, medium, turnLeftSide);0.01::getAction(medium, short, short, turnLeftSide);0.01::getAction(long, short, medium, turnLeftSide).
+
+0.4::getAction(medium, medium, medium, slowdown);0.3::getAction(medium, long, medium, slowdown);0.2::getAction(medium, medium, long, slowdown);0.1::getAction(long, medium, long, slowdown).
+
+0.4::getAction(short, long, long, turnRightSide);0.3::getAction(short, long, medium, turnRightSide);0.1::getAction(short, medium, long, turnRightSide);0.09::getAction(short, medium, medium, turnRightSide);0.03::getAction(medium, short, long, turnRightSide);0.02::getAction(short, short, long, turnRightSide);0.1::getAction(short, short, medium, turnRightSide).
+
+0.4::getAction(short, short, short, stop); 0.4::getAction(short, long, short, stop);0.2::getAction(short, medium, short, stop).
+
+distance(LRR, long):-max_right_thresh(TMax), LRR >= TMax.
+distance(LRR, medium):- min_right_thresh(TMin),max_right_thresh(TMax), LRR > TMin, LRR < TMax.
+distance(LRR, short):-min_right_thresh(TMin), LRR =< TMin.
+
+distance(LRL, long):-max_left_thresh(TMax), LRL >= TMax.
+distance(LRL, medium):- min_left_thresh(TMin),max_right_thresh(TMax), LRL > TMin, LRL < TMax.
+distance(LRL, short):-min_left_thresh(TMin), LRL =< TMin.
+
+distance(LRC, long):-max_central_thresh(TMax), LRC >= TMax.
+distance(LRC, medium):- min_central_thresh(TMin),max_central_thresh(TMax), LRC > TMin, LRC < TMax.
+distance(LRC, short):-min_central_thresh(TMin), LRC =< TMin.
+
+dontCrash(LRL, LRC, LRR, A):- distance(LRR, DR), distance(LRL, DL), distance(LRC, DC), getAction(DL,DC,DR, A).
+
+action(LRL, LRC, LRR, A):-dontCrash(LRL, LRC, LRR, A).
+
+

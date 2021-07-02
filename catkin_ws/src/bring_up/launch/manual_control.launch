@@ -1,4 +1,7 @@
 <launch>
+  <env name="GAZEBO_MODEL_PATH" value="$(find autonomos_gazebo_simulation)/models:$(optenv GAZEBO_MODEL_PATH)"/>
+  <env name="GAZEBO_RESOURCE_PATH" value="$(find autonomos_gazebo_simulation)/worlds:$(optenv GAZEBO_RESOURCE_PATH)"/>
+  <env name="GAZEBO_PLUGIN_PATH" value="$(find autonomos_gazebo_simulation)/../../devel/lib:$(optenv GAZEBO_PLUGIN_PATH)"/>
   <arg name="world"  default="autoNOMOS_curved_road"/>
   
   <include file="$(find gazebo_ros)/launch/empty_world.launch">

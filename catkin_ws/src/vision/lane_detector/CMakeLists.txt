@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(lane_detector)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -16,7 +16,8 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   tf
 )
-find_package( OpenCV REQUIRED )
+set(OpenCV_DIR "/usr/local/lib")
+find_package(OpenCV 4 REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -142,6 +143,7 @@ add_library(${PROJECT_NAME}
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(lane_detector_wang src/lane_detector_wang.cpp)
+add_executable(yolo src/yolo.cpp)
 ##add_executable(${PROJECT_NAME} src/lane_detector_wang.cpp)
 
 ## Rename C++ executable without prefix
@@ -153,9 +155,14 @@ add_executable(lane_detector_wang src/lane_detector_wang.cpp)
 ## Add cmake target dependencies of the executable
 ## same as for the library above
 add_dependencies(lane_detector_wang ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(yolo ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(lane_detector_wang
+   ${catkin_LIBRARIES}
+   ${OpenCV_LIBRARIES}
+)
+target_link_libraries(yolo
    ${catkin_LIBRARIES}
    ${OpenCV_LIBRARIES}
 )

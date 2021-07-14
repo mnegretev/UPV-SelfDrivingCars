@@ -18,8 +18,8 @@ void QtRosNode::run()
 {    
     ros::Rate loop(30);
     subCompressedImg   = n->subscribe("/app/camera/rgb/image_raw/compressed", 10, &QtRosNode::callbackCompressedImage, this);
-    pubSpeed    = n->advertise<std_msgs::Int16>("/AutoNOMOS_mini/manual_control/speed"   , 10);
-    pubSteering = n->advertise<std_msgs::Int16>("/AutoNOMOS_mini/manual_control/steering", 10);
+    pubSpeed    = n->advertise<std_msgs::Int16>("/AutoModelMini/manual_control/speed"   , 10);
+    pubSteering = n->advertise<std_msgs::Int16>("/AutoModelMini/manual_control/steering", 10);
 
     int isZeroSpeedSent = 0;
     std_msgs::Int16 msgSpeed;

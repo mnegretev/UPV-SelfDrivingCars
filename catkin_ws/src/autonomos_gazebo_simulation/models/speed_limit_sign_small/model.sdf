@@ -49,7 +49,7 @@
         <pose frame=''>0 0 0 0 -0 0</pose>
         <geometry>
           <mesh>
-            <uri>/home/victor/.gazebo/models/speed_limit_sign/meshes/speed_limit_sign.dae</uri>
+            <uri>model://speed_limit_sign/meshes/speed_limit_sign.dae</uri>
             <scale>2 2 2</scale>
           </mesh>
         </geometry>
